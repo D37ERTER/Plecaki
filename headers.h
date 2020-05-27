@@ -35,4 +35,8 @@
     void utworzZKonsoli();
     void utworzZPliku();
 
+    //funkcje operacji na plecaku
+    void wyswietlPlecak();
+    void usunPlecak();
+
 #endif

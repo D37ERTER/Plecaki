@@ -4,9 +4,9 @@ void utworzLosowo()
 {
     cout << "Tworzenie problemu plecakowego losowo." << endl;
     n = zKonsoli(1, 1000, "podaj ilosc elementow: ", "Nie poprawna ilosc. (musi byc od 1 do 1000)");
-    b = zKonsoli(1, 1000, "podaj pojemnosc plecaka: ", "Nie poprawna ilosc. (musi byc od 1 do 1000)");
-    int maxr = zKonsoli(1, 1000, "podaj maksymalny rozmiar elementu: ", "Nie poprawna ilosc. (musi byc od 1 do 1000)"); //maksymalny rozmiar przy losowaniu
-    int maxw = zKonsoli(1, 1000, "podaj maksymalna wartosc elementu: ", "Nie poprawna ilosc. (musi byc od 1 do 1000)"); //maksymalna wartosc plzy losowaniu
+    b = zKonsoli(1, 32767, "podaj pojemnosc plecaka: ", "Nie poprawna ilosc. (musi byc od 1 do 32767)");
+    int maxr = zKonsoli(1, 32767, "podaj maksymalny rozmiar elementu: ", "Nie poprawna ilosc. (musi byc od 1 do 32767)"); //maksymalny rozmiar przy losowaniu
+    int maxw = zKonsoli(1, 32767, "podaj maksymalna wartosc elementu: ", "Nie poprawna ilosc. (musi byc od 1 do 32767)"); //maksymalna wartosc plzy losowaniu
 
     r.resize(n);
     w.resize(n);
@@ -22,7 +22,7 @@ void utworzZKonsoli()
 {
     cout << "Tworzenie problemu plecakowego losowo." << endl;
     n = zKonsoli(1, 1000, "podaj ilosc elementow: ", "Nie poprawna ilosc. (musi byc od 1 do 1000)");
-    b = zKonsoli(1, 1000, "podaj pojemnosc plecaka: ", "Nie poprawna ilosc. (musi byc od 1 do 1000)");
+    b = zKonsoli(1, 32767, "podaj pojemnosc plecaka: ", "Nie poprawna ilosc. (musi byc od 1 do 32767)");
 
     r.resize(n);
     w.resize(n);

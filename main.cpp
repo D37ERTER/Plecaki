@@ -1,15 +1,15 @@
 #include "headers.h"
 
 //plecaki w pamieci
-int n; //ilosc elementow
-int b; //pojemnosc plecaka
+int n = 0; //ilosc elementow
+int b = 0; //pojemnosc plecaka
 vector<short> r; //rozmiar elementow
 vector<short> w; //wartosc elementow
 
 int main()
 {
     srand(time(NULL));
-    cout << "Witaj w PRAWIE najlepszym programie do pakowania rzeczy do plecakow. (v 0.0.1)"<< endl;
+    cout << "Witaj w PRAWIE najlepszym programie do pakowania rzeczy do plecakow. (v 0.1.0)"<< endl;
     int opcjaI;
     bool zamykanie = false;
 
@@ -17,7 +17,11 @@ int main()
     {
         cout << endl;
         if(n)
+        {
             cout << "Problem plecakowy w pamieci." << endl;
+            cout << "ilosc elementow: \t"<< n << endl;
+            cout << "pojemnosc plecaka: \t"<< b << endl;
+        }
         else
             cout << "Brak problemu plecakowego w pamieci." << endl;
         cout << "Co chcesz zrobic?" << endl;
@@ -28,8 +32,8 @@ int main()
         {
             cout << "4 - Wyswietl elementy mozliwe do spakowania" << endl;
             cout << "5 - Szukaj rozwiazania - APD - algorytm programowania dynamicznego" << endl;
-            cout << "6 - Szukaj rozwiazania - AZ - algorytm zachłanny" << endl;
-            cout << "7 - Szukaj rozwiazania - AW - algorytm wyczerpujący" << endl;
+            cout << "6 - Szukaj rozwiazania - AZ - algorytm zachlanny" << endl;
+            cout << "7 - Szukaj rozwiazania - AW - algorytm wyczerpujacy" << endl;
             cout << "8 - Zamknij program" << endl;
         }
         else
@@ -38,7 +42,7 @@ int main()
         }
 
         cout << endl;
-        opcjaI = zKonsoli(1, n?8:4, "","Bledne polecenie.");
+        opcjaI = zKonsoli(1, n?8:4, ":","Bledne polecenie.");
 
         switch(opcjaI)
         {
@@ -54,12 +58,12 @@ int main()
         case 4:
             if(!n)
             {
-                // TODO usuwanie
+                usunPlecak();
                 cout << "Konczenie pracy programu" << endl;
                 zamykanie = true;
             }
             else
-                ; // TODO wyswietlanie
+                wyswietlPlecak();
             break;
         case 5:
             // TODO APD
@@ -71,7 +75,7 @@ int main()
             // TODO AW
             break;
         case 8:
-        	// TODO usuwanie
+        	usunPlecak();
             cout << "Konczenie pracy programu" << endl;
             zamykanie = true;
             break;
