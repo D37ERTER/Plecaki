@@ -3,6 +3,7 @@
 
     #include <iostream> //konsola
     #include <fstream> //pliki
+    #include <math.h> //potęgi
     #include <stdlib.h> //random
     #include <time.h>   //random
     #include <chrono> //czas
