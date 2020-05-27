@@ -39,4 +39,9 @@
     void wyswietlPlecak();
     void usunPlecak();
 
+    //funkcje rozwiazan problemu plecakowego
+    void APD();
+    void AZ();
+    void AW();
+
 #endif

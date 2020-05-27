@@ -66,13 +66,13 @@ int main()
                 wyswietlPlecak();
             break;
         case 5:
-            // TODO APD
+            APD();
             break;
         case 6:
-            // TODO AZ
+            AZ();
             break;
         case 7:
-            // TODO AW
+            AW();
             break;
         case 8:
         	usunPlecak();
