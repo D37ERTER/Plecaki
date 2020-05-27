@@ -55,7 +55,7 @@ void AZ()
     quickSort(&kr, &kw, &org, 0, n-1);
 
     //wyswietlanie elementow przed sortowaniem i po sortowaniu (z wspolczynnikami)
-
+    /*
     cout << endl;
     cout << "+---------------+-------+" << endl;
     cout << "|ilosc elementow|"<< n <<"\t|" << endl;
@@ -78,7 +78,7 @@ void AZ()
     for(int i=0; i<n; i++)
         cout << "|" << i+1 << "\t|" << kr[i] << "\t|" << kw[i] << "\t|" << (double) kw[i]/kr[i] <<endl;
     cout << "+-------+-------+-------+" << endl;
-
+    */
 
     //wyswietlanie rozwiazania
     cout << "najlepsze rozwiazanie:" << endl;
