@@ -5,17 +5,108 @@ void APD()
 
 }
 
+void quickSort(vector<short> * r, vector<short> * w, vector<short> * org, int l, int p)
+{
+    int i=l;
+    int j=p;
+    double sv = (*w)[(l+p)/2]/ ((double)(*r)[(l+p)/2]);
+    int t;
+    do
+    {
+        //wyszukiwanie elementow do zamienienia
+        while( ((*w)[i] / ((double)(*r)[i])) > sv && i<p) i++;
+        while( ((*w)[j] / ((double)(*r)[j])) < sv && j>l) j--;
+
+        if(i>j) break;
+        //zamiana rozmiarow
+        t = (*r)[i];
+        (*r)[i] = (*r)[j];
+        (*r)[j] = t;
+
+        //zamiana wartosci
+        t = (*w)[i];
+        (*w)[i] = (*w)[j];
+        (*w)[j] = t;
+
+        //zamiana orginalnej numeracji
+        t = (*org)[i];
+        (*org)[i] = (*org)[j];
+        (*org)[j] = t;
+
+        i++;
+        j--;
+    }
+    while(i<=j);
+
+    if (l<j) quickSort(r, w, org, l, j);
+    if (p>i) quickSort(r, w, org, i, p);
+}
+
 void AZ()
 {
+    vector<short> kr = r; //kopia rozmiaru elementow
+    vector<short> kw = w; //kopia wartosci elementow
+    vector<short> org; //orginalna numeracja
+    org.resize(n);
+    for(int i=0; i<n; i++)
+        org[i] = i;
 
+    //sortowanie (quick sort)
+    quickSort(&kr, &kw, &org, 0, n-1);
+
+    //wyswietlanie elementow przed sortowaniem i po sortowaniu (z wspolczynnikami)
+
+    cout << endl;
+    cout << "+---------------+-------+" << endl;
+    cout << "|ilosc elementow|"<< n <<"\t|" << endl;
+    cout << "+---------------+-------+" << endl;
+    cout << "|pojemn. plecaka|"<< b <<"\t|" << endl;
+    cout << "+-------+-------+-------+" << endl;
+    cout << "|num.el.|rozmiar|wartosc|" << endl;
+    cout << "+-------+-------+-------+" << endl;
+    for(int i=0; i<n; i++)
+        cout << "|" << i+1 << "\t|" << r[i] << "\t|" << w[i] << "\t|"<< (double) w[i]/r[i] << endl;
+    cout << "+-------+-------+-------+" << endl;
+    cout << endl;
+    cout << "+---------------+-------+" << endl;
+    cout << "|ilosc elementow|"<< n <<"\t|" << endl;
+    cout << "+---------------+-------+" << endl;
+    cout << "|pojemn. plecaka|"<< b <<"\t|" << endl;
+    cout << "+-------+-------+-------+" << endl;
+    cout << "|num.el.|rozmiar|wartosc|" << endl;
+    cout << "+-------+-------+-------+" << endl;
+    for(int i=0; i<n; i++)
+        cout << "|" << i+1 << "\t|" << kr[i] << "\t|" << kw[i] << "\t|" << (double) kw[i]/kr[i] <<endl;
+    cout << "+-------+-------+-------+" << endl;
+
+
+    //wyswietlanie rozwiazania
+    cout << "najlepsze rozwiazanie:" << endl;
+    cout << "\tspakowane elementy: ";
+    int sr = 0;
+    int sw = 0;
+    for(int i=0;i<n && sr < b;i++)
+    {
+        if(sr + r[i] <= b)
+        {
+            cout << org[i]+1 << " ";
+            sr += kr[i];
+            sw += kw[i];
+        }
+    }
+    cout << endl;
+    cout << "\twartosc rozwiazania: " << sw << endl;
+    cout << "\tzajete miejsce: " << sr << endl;
 }
 
 void AW() //w teorii działa do n=30
 {
-    int maxu = pow(2, n);
+    int maxu = pow(2, n); //ilosc ulozen
+    bool dop[maxu]; //dopuszczalnosc ulozenia
     int sr[maxu]; //suma rozmiarow ulozenia
     int sw[maxu]; //suma wartosci ulozenia
-    bool dop[maxu]; //dopuszczalnosc ulozenia
+
+    //tworzenie tabelki
     int i; //index elementu w problemie plecakowym
     int ku; //kopia u
     for(int u=1; u<maxu; u++) //opcje ulozenia elementow
@@ -41,18 +132,25 @@ void AW() //w teorii działa do n=30
             i++;
         }
     }
+    //wyswietlanie tabelki z wartosciami
     //for(int j=1; j<maxu; j++)
     //    cout << j << "\t" << sr[j] << "\t" << dop[j] << "\t" << sw[j] << endl;
+
+    //szukanie ulozenia dopuszczalnego z maksymalna wartoscia
     int maxsw = 0;
     int maxswu = -1;
+    int maxswsr = -1;
     for(int u=1; u<maxu; u++)
     {
         if(dop[u] && sw[u] > maxsw)
         {
             maxsw = sw[u];
             maxswu = u;
+            maxswsr = sr[u];
         }
     }
+
+    //wypisywanie rozwiazania
     cout << "najlepsze rozwiazanie:" << endl;
     cout << "\tnumer rozwiazania: " << maxswu << endl;
     cout << "\tspakowane elementy: ";
@@ -64,4 +162,5 @@ void AW() //w teorii działa do n=30
     }
     cout << endl;
     cout << "\twartosc rozwiazania: " << maxsw << endl;
+    cout << "\tzajete miejsce: " << maxswsr << endl;
 }

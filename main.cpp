@@ -9,7 +9,7 @@ vector<short> w; //wartosc elementow
 int main()
 {
     srand(time(NULL));
-    cout << "Witaj w PRAWIE najlepszym programie do pakowania rzeczy do plecakow. (v 0.1.2)"<< endl;
+    cout << "Witaj w PRAWIE najlepszym programie do pakowania rzeczy do plecakow. (v 0.1.3)"<< endl;
     int opcjaI;
     bool zamykanie = false;
 
