@@ -2,7 +2,52 @@
 
 void APD()
 {
+    int macierz[n+1][b+1];
+    //zerowanie pierwszego wiersza i kolumny
+    for(int i=0;i<=n;i++)
+        macierz[i][0] = 0;
+    for(int i=0;i<=b;i++)
+        macierz[0][i] = 0;
+    //wypelnianie macierzy
+    for(int i=1;i<=n;i++)
+    {
+        //przepisywanie z gory do rozmiaru
+        for(int j=1; j<r[i-1]; j++)
+            macierz[i][j] = macierz[i-1][j];
+        //wypelnianie maksami
+        for(int j=r[i-1]; j<=b; j++)
+        {
+            if(macierz[i-1][j-r[i-1]] + w[i-1] > macierz[i-1][j])
+                macierz[i][j] = macierz[i-1][j-r[i-1]] + w[i-1];
+            else
+                macierz[i][j] = macierz[i-1][j];
+        }
+    }
 
+    //wyswietlanie macierzy
+    /*
+    for(int i=0;i<=n;i++)
+    {
+        for(int j=0; j<=b; j++)
+            cout << macierz[i][j] << "\t";
+        cout << endl;
+    }*/
+
+    //odczytwyanie rozwiazania
+    cout << "najlepsze rozwiazanie:" << endl;
+    cout << "\tspakowane elementy: ";
+    int j = b;
+    for(int i=n; i>=1; i--)
+    {
+        if(macierz[i][j] != macierz[i-1][j])
+        {
+            cout << i << " ";
+            j -= r[i-1];
+        }
+    }
+    cout << endl;
+    cout << "\twartosc rozwiazania: " << macierz[n][b] << endl;
+    cout << "\tzajete miejsce: " << b-j << endl;
 }
 
 void quickSort(vector<short> * r, vector<short> * w, vector<short> * org, int l, int p)
