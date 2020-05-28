@@ -33,6 +33,7 @@
 
     //funckcje tworzenia grafow
     void utworzLosowo();
+    void utworzLosowoTest(int n1, int b1, int maxr, int maxw);
     void utworzZKonsoli();
     void utworzZPliku();
 
@@ -44,5 +45,6 @@
     void APD();
     void AZ();
     void AW();
+    extern tproc rozwTest[];
 
 #endif

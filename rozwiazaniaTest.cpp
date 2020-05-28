@@ -3,7 +3,7 @@
 /*
     zlozonosc pamieciowa : O((n+1)*(b+1))
 */
-void APD()
+void APDTest()
 {
     int macierz[n+1][b+1];
     //zerowanie pierwszego wiersza i kolumny
@@ -37,23 +37,25 @@ void APD()
     }*/
 
     //odczytwyanie rozwiazania
-    cout << "najlepsze rozwiazanie:" << endl;
-    cout << "\tspakowane elementy: ";
+
+    //cout << "najlepsze rozwiazanie:" << endl;
+    //cout << "\tspakowane elementy: ";
     int j = b;
     for(int i=n; i>=1; i--)
     {
         if(macierz[i][j] != macierz[i-1][j])
         {
-            cout << i << " ";
+           // cout << i << " ";
             j -= r[i-1];
         }
     }
-    cout << endl;
-    cout << "\twartosc rozwiazania: " << macierz[n][b] << endl;
-    cout << "\tzajete miejsce: " << b-j << endl;
+    //cout << endl;
+    //cout << "\twartosc rozwiazania: " << macierz[n][b] << endl;
+    //cout << "\tzajete miejsce: " << b-j << endl;
+
 }
 
-void quickSort(vector<short> * r, vector<short> * w, vector<short> * org, int l, int p)
+void quickSortTest(vector<short> * r, vector<short> * w, vector<short> * org, int l, int p)
 {
     int i=l;
     int j=p;
@@ -86,24 +88,22 @@ void quickSort(vector<short> * r, vector<short> * w, vector<short> * org, int l,
     }
     while(i<=j);
 
-    if (l<j) quickSort(r, w, org, l, j);
-    if (p>i) quickSort(r, w, org, i, p);
+    if (l<j) quickSortTest(r, w, org, l, j);
+    if (p>i) quickSortTest(r, w, org, i, p);
 }
 
 /*
-    zlozonosc pamieciowa : O(3*n)
+    zlozonosc pamieciowa : O(n)
 */
-void AZ()
+void AZTest() //bez kopii (oszczędnosc pamieci)
 {
-    vector<short> kr = r; //kopia rozmiaru elementow
-    vector<short> kw = w; //kopia wartosci elementow
     vector<short> org; //orginalna numeracja
     org.resize(n);
     for(int i=0; i<n; i++)
         org[i] = i;
 
     //sortowanie (quick sort)
-    quickSort(&kr, &kw, &org, 0, n-1);
+    quickSortTest(&r, &w, &org, 0, n-1);
 
     //wyswietlanie elementow przed sortowaniem i po sortowaniu (z wspolczynnikami)
     /*
@@ -132,33 +132,35 @@ void AZ()
     */
 
     //wyswietlanie rozwiazania
-    cout << "najlepsze rozwiazanie:" << endl;
-    cout << "\tspakowane elementy: ";
+    //cout << "najlepsze rozwiazanie:" << endl;
+    //cout << "\tspakowane elementy: ";
     int sr = 0;
     int sw = 0;
     for(int i=0;i<n && sr < b;i++)
     {
         if(sr + r[i] <= b)
         {
-            cout << org[i]+1 << " ";
-            sr += kr[i];
-            sw += kw[i];
+            //cout << org[i]+1 << " ";
+            sr += r[i];
+            sw += w[i];
         }
     }
-    cout << endl;
-    cout << "\twartosc rozwiazania: " << sw << endl;
-    cout << "\tzajete miejsce: " << sr << endl;
+    //cout << endl;
+    //cout << "\twartosc rozwiazania: " << sw << endl;
+    //cout << "\tzajete miejsce: " << sr << endl;
 }
 
 /*
     zlozonosc pamieciowa : O(3*(2^n))
 */
-void AW() //w teorii działa do n=30
+void AWTest() //w teorii działa do n=17(sr i sw typu int) n=18(sr i sw typu short)
 {
     int maxu = pow(2, n); //ilosc ulozen
     bool dop[maxu]; //dopuszczalnosc ulozenia
     int sr[maxu]; //suma rozmiarow ulozenia
     int sw[maxu]; //suma wartosci ulozenia
+    //short sr[maxu]; //suma rozmiarow ulozenia
+    //short sw[maxu]; //suma wartosci ulozenia
 
     //tworzenie tabelki
     int i; //index elementu w problemie plecakowym
@@ -205,16 +207,23 @@ void AW() //w teorii działa do n=30
     }
 
     //wypisywanie rozwiazania
-    cout << "najlepsze rozwiazanie:" << endl;
-    cout << "\tnumer rozwiazania: " << maxswu << endl;
-    cout << "\tspakowane elementy: ";
+    //cout << "najlepsze rozwiazanie:" << endl;
+    //cout << "\tnumer rozwiazania: " << maxswu << endl;
+    //cout << "\tspakowane elementy: ";
     for(int i=0; i<n; i++)
     {
         if(maxswu%2)
-            cout << i+1 << " ";
+            ;//cout << i+1 << " ";
         maxswu/=2;
     }
-    cout << endl;
-    cout << "\twartosc rozwiazania: " << maxsw << endl;
-    cout << "\tzajete miejsce: " << maxswsr << endl;
+    //cout << endl;
+    //cout << "\twartosc rozwiazania: " << maxsw << endl;
+    //cout << "\tzajete miejsce: " << maxswsr << endl;
 }
+
+tproc rozwTest[3] =
+{
+    APDTest,
+    AZTest,
+    AWTest
+};

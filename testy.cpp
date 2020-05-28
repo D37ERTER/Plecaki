@@ -16,11 +16,11 @@ string pliki[9][2][2]=
 	{{"wyniki/hamilton90ns.txt","wyniki/euler90ns.txt"},{"wyniki/hamilton90s.txt","wyniki/euler90s.txt"}}
 };
 
-void zapisz(long long pomiary[], int ile, string nazwa, int iloscPomiarow)
+void zapisz(long long pomiary[], int naglowek, string nazwa, int iloscPomiarow)
 {
 	ofstream zapis;
 	zapis.open(nazwa, ios_base::app);
-	zapis << ile << '\t';
+	zapis << naglowek << '\t';
 	for (int i=0;i<iloscPomiarow;i++)
 		zapis<<pomiary[i]<<'\t';
 	zapis << '\n';
@@ -29,5 +29,35 @@ void zapisz(long long pomiary[], int ile, string nazwa, int iloscPomiarow)
 
 void test()
 {
+    long long pomiary[100];
+    /*
+        test nr 2 -
+            max n=17 dla int,
+            max=18 dla short (wtedy maxRozmiar i maxWartosc muszą być mniejsze niż 1500)
+            b - dla dużych wartosci ( >2500) zwieksza czas
+            maxRozmiar, maxWartosc : nie ma wsplywu na czas
 
+    */
+    int wartoscN = 17;
+    int maxRozmiar = 5000;
+    int testNumer = 1;
+
+    for(int maxWartosc=10; maxWartosc<=25000; maxWartosc*=2)
+    {
+        int indexPom=0;
+        for(int wartoscB=10; wartoscB<=25000; wartoscB*=2)
+        {
+            cout << maxWartosc << " " << wartoscB << ": ";
+            utworzLosowoTest(wartoscN, wartoscB, maxRozmiar, maxWartosc);
+            start = chrono::steady_clock::now();
+            rozwTest[testNumer]();
+            endx = chrono::steady_clock::now();
+            pomiary[indexPom++] = chrono::duration_cast<chrono::nanoseconds>(endx - start).count();
+            cout << "czas : " << pomiary[indexPom-1] << "ns";
+            usunPlecak();
+            cout << endl;
+        }
+        zapisz(pomiary, maxWartosc, "test2B.txt", indexPom);
+    }
+    cout << "koniec testu" << endl;
 }

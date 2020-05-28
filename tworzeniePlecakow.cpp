@@ -18,6 +18,21 @@ void utworzLosowo()
     }
 }
 
+void utworzLosowoTest(int n1, int b1, int maxr, int maxw)
+{
+    //cout << "Tworzenie problemu plecakowego losowo." << endl;
+    n = n1;
+    b = b1;
+    r.resize(n);
+    w.resize(n);
+
+    for(int i=0; i<n; i++)
+    {
+        r[i] = 1 + rand() % maxr;
+        w[i] = 1 + rand() % maxw;
+    }
+}
+
 void utworzZKonsoli()
 {
     cout << "Tworzenie problemu plecakowego losowo." << endl;

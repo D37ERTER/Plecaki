@@ -42,17 +42,23 @@ int main()
         }
 
         cout << endl;
-        opcjaI = zKonsoli(1, n?8:4, ":","Bledne polecenie.");
+        opcjaI = zKonsoli(0, n?8:4, ":","Bledne polecenie.");
 
         switch(opcjaI)
         {
+        case 0:
+            test();
+            break;
         case 1:
+            usunPlecak();
             utworzLosowo();
             break;
         case 2:
+            usunPlecak();
             utworzZKonsoli();
             break;
         case 3:
+            usunPlecak();
             utworzZPliku();
             break;
         case 4:
