@@ -44,8 +44,8 @@ void utworzZKonsoli()
     cout << "Wprowadzanie elementow z konsoli." << endl;
     for(int i=0; i<n; i++)
     {
-        r[i] = zKonsoli("podaj rozmiar elementu (" + toString(i+1) + "/" + toString(n) + "): ", "Bledny rozmiar.");
-        w[i] = zKonsoli("podaj wartosc elementu (" + toString(i+1) + "/" + toString(n) + "): ", "Bledna wartosc.");
+        r[i] = zKonsoli(1, (b<32767)?b:32767, "podaj rozmiar elementu (" + toString(i+1) + "/" + toString(n) + "): ", "Bledny rozmiar.");
+        w[i] = zKonsoli(1, 32767, "podaj wartosc elementu (" + toString(i+1) + "/" + toString(n) + "): ", "Bledna wartosc.");
     }
 }
 
