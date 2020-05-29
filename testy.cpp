@@ -31,33 +31,45 @@ void test()
 {
     long long pomiary[100];
     /*
+        test nr 0 -
+
+        test nr 1 -
+            n wplywa na czas i (pewnie na pamiec tez ale komu chce sie czekac) O(n*logn)
+            b, maxRozmar, maxWartosc nie wpywaja na czas i pamiec
         test nr 2 -
-            max n=17 dla int,
-            max=18 dla short (wtedy maxRozmiar i maxWartosc muszą być mniejsze niż 1500)
-            b - dla dużych wartosci ( >2500) zwieksza czas
-            maxRozmiar, maxWartosc : nie ma wsplywu na czas
+            pamiec : max n=17 dla int,
+            pamiec : max=18 dla short (wtedy maxRozmiar i maxWartosc muszą być mniejsze niż 1500)
+            czas : wzrasta wykladniczo z n (n wieksze o 1 to czas wiekszy razy 2) O(2^n) najlepiej wzrost widać dla n = [12..17] i b >= 65536
+            czas : b - dla dużych wartosci (>=65536) skokowo zwieksza czas; prawdopodobnie optymalizacja przez system dla b <= 65536
+            czas : maxRozmiar, maxWartosc : nie ma wsplywu na czas
 
     */
-    int wartoscN = 17;
-    int maxRozmiar = 5000;
-    int testNumer = 1;
+    //parametry poczatkowe
+    int maxRozmiar = 16384;
+    int maxWartosc = 16384;
+    //int wartoscB = 67108864;
+    int testNumer = 2;
 
-    for(int maxWartosc=10; maxWartosc<=25000; maxWartosc*=2)
+    //test
+    for(int wartoscB = 128; wartoscB<=268435456; wartoscB*=2)
     {
+        int poprzedniCzas = 0;
         int indexPom=0;
-        for(int wartoscB=10; wartoscB<=25000; wartoscB*=2)
+        for(int wartoscN = 11; wartoscN<=17; wartoscN++)
         {
-            cout << maxWartosc << " " << wartoscB << ": ";
+            cout << wartoscB << " " << wartoscN << ": ";
             utworzLosowoTest(wartoscN, wartoscB, maxRozmiar, maxWartosc);
             start = chrono::steady_clock::now();
             rozwTest[testNumer]();
             endx = chrono::steady_clock::now();
             pomiary[indexPom++] = chrono::duration_cast<chrono::nanoseconds>(endx - start).count();
-            cout << "czas : " << pomiary[indexPom-1] << "ns";
+            cout << "czas : " << pomiary[indexPom-1] << "ns " ;
+            cout << "stosunek: " << (poprzedniCzas? ((pomiary[indexPom-1]/100000)/((double)(poprzedniCzas))) :0);
+            poprzedniCzas = pomiary[indexPom-1]/100000;
             usunPlecak();
             cout << endl;
         }
-        zapisz(pomiary, maxWartosc, "test2B.txt", indexPom);
+        zapisz(pomiary, 0, "test2v2.txt", indexPom);
     }
     cout << "koniec testu" << endl;
 }
