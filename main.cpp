@@ -6,6 +6,8 @@ int b = 0; //pojemnosc plecaka
 vector<short> r; //rozmiar elementow
 vector<short> w; //wartosc elementow
 
+//komentuj¹cy komentarz
+
 int main()
 {
     srand(time(NULL));
