@@ -127,7 +127,7 @@ void AZ()
     cout << "|num.el.|rozmiar|wartosc|" << endl;
     cout << "+-------+-------+-------+" << endl;
     for(int i=0; i<n; i++)
-        cout << "|" << i+1 << "\t|" << kr[i] << "\t|" << kw[i] << "\t|" << (double) kw[i]/kr[i] <<endl;
+        cout << "|" << org[i]+1 << "\t|" << kr[i] << "\t|" << kw[i] << "\t|" << (double) kw[i]/kr[i] <<endl;
     cout << "+-------+-------+-------+" << endl;
     */
 
@@ -136,9 +136,9 @@ void AZ()
     cout << "\tspakowane elementy: ";
     int sr = 0;
     int sw = 0;
-    for(int i=0;i<n && sr < b;i++)
+    for(int i=0;i<n && sr <= b;i++)
     {
-        if(sr + r[i] <= b)
+        if(sr + kr[i] <= b)
         {
             cout << org[i]+1 << " ";
             sr += kr[i];
