@@ -69,11 +69,21 @@ void utworzZPliku()
         {
             plik >> r[i];
             plik >> w[i];
+            if (r[i]<1 || w[i]<1 || r[i]>b)
+            {
+            	cout<<"Bledna wartosc w pliku"<<endl;
+            	n=0;
+            	b=0;
+            	plik.close();
+            	return;
+			}
             i++;
         }
         if(i!=n)
         {
             cout << "Zbyt malo danych elemntow. :C";
+            n=0;
+            b=0;
             plik.close();
             return;
         }

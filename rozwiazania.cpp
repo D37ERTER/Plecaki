@@ -15,7 +15,7 @@ void APD()
     for(int i=1;i<=n;i++)
     {
         //przepisywanie z gory do rozmiaru
-        for(int j=1; j<r[i-1]; j++)
+        for(int j=1; j<r[i-1]&&j<=b; j++)
             macierz[i][j] = macierz[i-1][j];
         //wypelnianie maksami
         for(int j=r[i-1]; j<=b; j++)
