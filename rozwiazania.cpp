@@ -155,15 +155,15 @@ void AZ()
 */
 void AW() //w teorii działa do n=30
 {
-    int maxu = pow(2, n); //ilosc ulozen
-    bool dop[maxu]; //dopuszczalnosc ulozenia
-    int sr[maxu]; //suma rozmiarow ulozenia
-    int sw[maxu]; //suma wartosci ulozenia
+    long long int maxu = pow(2, n); //ilosc ulozen
+    vector<bool> dop(maxu); //bool dop[maxu]; //dopuszczalnosc ulozenia
+    vector<long long> sr(maxu); //int sr[maxu]; //suma rozmiarow ulozenia
+    vector<long long> sw(maxu);//int sw[maxu]; //suma wartosci ulozenia
 
     //tworzenie tabelki
     int i; //index elementu w problemie plecakowym
-    int ku; //kopia u
-    for(int u=1; u<maxu; u++) //opcje ulozenia elementow
+    long long int ku; //kopia u
+    for(long long int u=1; u<maxu; u++) //opcje ulozenia elementow
     {
         sr[u] = 0;
         sw[u] = 0;
@@ -191,10 +191,10 @@ void AW() //w teorii działa do n=30
     //    cout << j << "\t" << sr[j] << "\t" << dop[j] << "\t" << sw[j] << endl;
 
     //szukanie ulozenia dopuszczalnego z maksymalna wartoscia
-    int maxsw = 0;
-    int maxswu = -1;
-    int maxswsr = -1;
-    for(int u=1; u<maxu; u++)
+    long long int maxsw = 0;
+    long long int maxswu = -1;
+    long long int maxswsr = -1;
+    for(long long int u=1; u<maxu; u++)
     {
         if(dop[u] && sw[u] > maxsw)
         {

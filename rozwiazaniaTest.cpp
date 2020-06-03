@@ -155,17 +155,17 @@ void AZTest() //bez kopii (oszczędnosc pamieci)
 */
 void AWTest() //w teorii działa do n=17(sr i sw typu int) n=18(sr i sw typu short)
 {
-    int maxu = pow(2, n); //ilosc ulozen
-    bool dop[maxu]; //dopuszczalnosc ulozenia
-    int sr[maxu]; //suma rozmiarow ulozenia
-    int sw[maxu]; //suma wartosci ulozenia
+    long long maxu = pow(2, n); //ilosc ulozen
+    vector<bool> dop(maxu); //bool dop[maxu]; //dopuszczalnosc ulozenia
+    vector<long long> sr(maxu); //int sr[maxu]; //suma rozmiarow ulozenia
+    vector<long long> sw(maxu); //int sw[maxu]; //suma wartosci ulozenia
     //short sr[maxu]; //suma rozmiarow ulozenia
     //short sw[maxu]; //suma wartosci ulozenia
 
     //tworzenie tabelki
     int i; //index elementu w problemie plecakowym
-    int ku; //kopia u
-    for(int u=1; u<maxu; u++) //opcje ulozenia elementow
+    long long ku; //kopia u
+    for(long long u=1; u<maxu; u++) //opcje ulozenia elementow
     {
         sr[u] = 0;
         sw[u] = 0;
@@ -193,9 +193,9 @@ void AWTest() //w teorii działa do n=17(sr i sw typu int) n=18(sr i sw typu sho
     //    cout << j << "\t" << sr[j] << "\t" << dop[j] << "\t" << sw[j] << endl;
 
     //szukanie ulozenia dopuszczalnego z maksymalna wartoscia
-    int maxsw = 0;
-    int maxswu = -1;
-    int maxswsr = -1;
+    long long  maxsw = 0;
+    long long maxswu = -1;
+    long long maxswsr = -1;
     for(int u=1; u<maxu; u++)
     {
         if(dop[u] && sw[u] > maxsw)
